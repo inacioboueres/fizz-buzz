@@ -1,0 +1,26 @@
+</br>
+<div class="page-header">
+	<h2>Classic</h2>
+</div>
+<div  ng-repeat="message in messeges" >
+	 <div    role="alert" class="{{message.messageClass}} fadein fadeout"><strong>{{message.strong}} </strong>{{message.message}}</div>
+</div>
+<div class="row">
+	<div class="col-md-9">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="teste" class="col-sm-3 control-label">Game Teste:</label>
+				<div class="col-sm-9">
+					<input id="teste" ng-model="teste" type="text" class="form-control" />
+					<input type="submit" value="Play" class="btn btn-primary" ng-click="login()"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="result" class="col-sm-3 control-label">Result:</label>
+				<div class="col-sm-9">
+					{{result}}
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
