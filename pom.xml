@@ -56,10 +56,10 @@
 <!-- By default that is to put the resulting archive into the deployments folder. -->
 <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 	<id>openshift</id>
-	<build>
+<!--	<build>
 		<finalName>fizz-buzz</finalName>
 		<plugins>
-			<!--
+			
  <plugin>
        <artifactId>maven-war-plugin</artifactId>
        <version>2.4</version>
@@ -68,9 +68,9 @@
          <warName>ROOT</warName>
        </configuration>
      </plugin>
- -->
+
 		</plugins>
-	</build>
+	</build> -->
 </profile>
     </profiles>
 </project>
