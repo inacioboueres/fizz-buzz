@@ -47,8 +47,6 @@ app.controller('ClassicController', function($scope, $rootScope, $http) {
 	$scope.title = 'Classic';
 	 
 	$scope.login = function() {
-		$scope.classicSearch.numbers = $scope.teste;
-		var param = angular.toJson($scope.classicSearch);
 		$http({
 			method : "GET",
 			url : 'classicFast/'+$scope.teste,
@@ -78,8 +76,6 @@ app.controller('ClassicLNController', function($scope, $rootScope, $http) {
 	$scope.title = 'Classic Large Numbers';
 	 
 	$scope.login = function() {
-		$scope.classicSearch.numbers = $scope.teste;
-		var param = angular.toJson($scope.classicSearch);
 		$http({
 			method : "GET",
 			url : 'classicBigNumber/'+$scope.teste,
@@ -101,6 +97,14 @@ app.controller('ClassicLNController', function($scope, $rootScope, $http) {
 
 app.controller('PlusController', function($scope, $rootScope, $http) {
 	console.log('plus');
+	
+	$scope.param = {
+			orderId : "",
+			typeId : "",
+			numbers : "",
+			rules : [],
+		};
+	
 	$scope.orders = [{
 	      	'id': 'U',
 	      	'desc': 'Unordered '
@@ -156,11 +160,14 @@ app.controller('PlusController', function($scope, $rootScope, $http) {
     }
 	 
 	$scope.login = function() {
-		$scope.classicSearch.numbers = $scope.teste;
-		var param = angular.toJson($scope.classicSearch);
+		$scope.param.numbers = $scope.teste;
+		$scope.param.orderId = $scope.orderId;
+		$scope.param.typeId = $scope.typeId;
+		$scope.param.rules = $scope.rules;
+		var param = angular.toJson($scope.param);
 		$http({
 			method : "GET",
-			url : 'classicBigNumber/'+$scope.teste,
+			url : 'custom/'+param,
 			headers : {
 				'Content-Type' : 'application/json'
 			}
