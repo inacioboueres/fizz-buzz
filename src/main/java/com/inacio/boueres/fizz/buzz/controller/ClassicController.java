@@ -185,13 +185,13 @@ public class ClassicController {
     
     //Generic
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleDefaultException(Exception e) {
     	return "{\"error\": \""+ "Exception"+"\"}";
     }
     
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleDefaultException(RuntimeException e) {
     	return "{\"error\": \""+ "RuntimeException"+"\"}";
     }
@@ -199,13 +199,13 @@ public class ClassicController {
     
     //expected erros
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
     public String handleDefaultException(NumberFormatException e) {
     	return "{\"error\": \""+"You choose a very large number, please try the 'ClassicLN' version"+"\"}";
     }
     
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INSUFFICIENT_STORAGE)
     public String handleDefaultException(TooManyNumbersException e) {
     	return "{\"error\": \""+"Too bad, you choose too many numbers, and this overload our servers, please try again with fewer numbers"+"\"}";
     }

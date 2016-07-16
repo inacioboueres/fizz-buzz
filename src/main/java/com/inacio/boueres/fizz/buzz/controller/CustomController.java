@@ -58,6 +58,8 @@ public class CustomController {
 			throw new MalformedJsonException();
 		} catch (IOException e) {
 			throw new MalformedJsonException();
+		} catch (NumberFormatException e) { //Can try to pass something else to rules.id that expect a BigDecimal
+			throw new MalformedJsonException();
 		}
     	//the output will be stored on a StringBuilder because use a string is too inefficient 
     	StringBuilder sb = new StringBuilder();
@@ -164,31 +166,19 @@ public class CustomController {
 			sb.append(ret+", ");
 		}
     	
-//    	StringBuilder ret = new StringBuilder();
-//    	if(n.remainder(TREE).equals(BigDecimal.ZERO)){//if it is divisible by 3 add "Fizz"
-//    		ret.append("Fizz");
-//    		if(n.remainder(FIVE).equals(BigDecimal.ZERO)){//if it is divisible by 3 and 5 add "Fizz Buzz"
-//        		ret.append(" Buzz");
-//        	}
-//    	}else if(n.remainder(FIVE).equals(BigDecimal.ZERO)){//if it is divisible by 5 add "Buzz"
-//    		ret.append("Buzz");
-//    	}else{// else add number
-//    		ret.append(n);
-//    	} 
-//    	sb.append(ret+", ");//append the result + ", " to make the output more acceptable
     }
     
     //handlers for exceptions
     
     //Generic
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleDefaultException(Exception e) {
     	return "{\"error\": \""+ "Exception"+"\"}";
     }
     
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleDefaultException(RuntimeException e) {
     	return "{\"error\": \""+ "RuntimeException"+"\"}";
     }
@@ -196,19 +186,13 @@ public class CustomController {
     
     //expected erros
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleDefaultException(NumberFormatException e) {
-    	return "{\"error\": \""+"You choose a very large number, please try the 'ClassicLN' version"+"\"}";
-    }
-    
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INSUFFICIENT_STORAGE)
     public String handleDefaultException(TooManyNumbersException e) {
     	return "{\"error\": \""+"Too bad, you choose too many numbers, and this overload our servers, please try again with fewer numbers"+"\"}";
     }
     
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
     public String handleDefaultException(MalformedJsonException e) {
     	return "{\"error\": \""+"The Json parameter is invalid!"+"\"}";
     }

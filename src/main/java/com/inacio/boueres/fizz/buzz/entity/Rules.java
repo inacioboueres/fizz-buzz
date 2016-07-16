@@ -22,6 +22,14 @@ public class Rules implements Serializable{
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	public Rules(BigDecimal id, String desc) {
+		super();
+		this.id = id;
+		this.desc = desc;
+	}
+	public Rules( ) {
+		super(); 
+	}
 	
 	
 
