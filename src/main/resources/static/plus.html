@@ -1,6 +1,6 @@
 </br>
 <div class="page-header">
-	<h2>Classic</h2>
+	<h2>{{title}}</h2>
 </div>
 <div  ng-repeat="message in messeges" >
 	 <div    role="alert" class="{{message.messageClass}} fadein fadeout"><strong>{{message.strong}} </strong>{{message.message}}</div>
@@ -8,6 +8,62 @@
 <div class="row">
 	<div class="col-md-9">
 		<form class="form-horizontal">
+		
+			<div class="form-group">
+				<label  class="col-sm-3 control-label">Rules:</label>
+				<div class="col-sm-9">
+					<div class="col-sm-3">
+						<label for="ruleNumber" class="col-sm-3 control-label">Number:</label>
+						<input id="ruleNumber" ng-model="ruleNumber" type="text" class="form-control" />
+						<label for="ruleDesc" class="col-sm-3 control-label">Word:</label>
+						<input id="ruleDesc" ng-model="ruleDesc" type="text" class="form-control" />
+						<button type="button" class="btn  btn-primary"
+											ng-click="newRule()">Add</button>
+					</div>
+					<div class="col-sm-6">
+						<label for="rules" class="col-sm-6 control-label">Active Rules:</label>
+						<table id="rules" class="table table-condensed">
+							<tr>
+								<th>Number</th> 
+								<th>Word</th>
+								<th>Actions</th>
+							</tr>
+					
+							<tr ng-repeat="rule in rules">
+					
+								<td>{{ rule.id }}</td> 
+								<td>{{ rule.desc }}</td>
+					
+								<td> 
+									<button type="button" class="btn  btn-danger"
+											ng-click="removeRule(rule)">Delete</button>
+								</td>
+							</tr>
+					
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="form-group">
+				<label for="order" class="col-sm-3 control-label">Order:</label>
+				<div class="col-sm-9">
+				    <span ng-repeat='order in orders' id="order" >
+				    	<input type='radio' ng-model='$parent.orderId' value='{{order.id}}'/> {{order.desc}}
+				    	
+				    </span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="type" class="col-sm-3 control-label">Game mode:</label>
+				<div class="col-sm-9">
+				    <span ng-repeat='type in types' id="order" >
+				    	<input type='radio' ng-model='$parent.typeId' value='{{type.id}}'/> {{type.desc}}
+				    	
+				    </span>
+				</div>
+			</div>
 			<div class="form-group">
 				<label for="teste" class="col-sm-3 control-label">Game Teste:</label>
 				<div class="col-sm-9">
