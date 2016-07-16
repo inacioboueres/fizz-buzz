@@ -373,6 +373,56 @@ public class CustomControllerTest {
 
 	}
 	
+	@Test
+	public void customFailInvalidRulesZero() {
+		String ret = "The Rules Id must be greater than 0!" ;
+
+		
+		CustomParam cp = new CustomParam();
+		cp.setNumbers("1-1000");
+		cp.setOrderId("U");
+		cp.setTypeId("D");
+		cp.setRules(new ArrayList<Rules>());
+		cp.getRules().add(new Rules(new BigDecimal("3"),"Fizz"));
+		cp.getRules().add(new Rules(new BigDecimal("0"),"Buzz"));
+		
+		String param = "";
+		try {
+			param = mapper.writeValueAsString(cp);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		when().get("/custom/{param}", param)
+		.then().statusCode(HttpStatus.EXPECTATION_FAILED.value())
+		.body("error", Matchers.is(ret));
+
+	}
+	
+	@Test
+	public void customFailInvalidRulesNegative() {
+		String ret = "The Rules Id must be greater than 0!" ;
+
+		
+		CustomParam cp = new CustomParam();
+		cp.setNumbers("1-1000");
+		cp.setOrderId("U");
+		cp.setTypeId("D");
+		cp.setRules(new ArrayList<Rules>());
+		cp.getRules().add(new Rules(new BigDecimal("3"),"Fizz"));
+		cp.getRules().add(new Rules(new BigDecimal("-1"),"Buzz"));
+		
+		String param = "";
+		try {
+			param = mapper.writeValueAsString(cp);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		when().get("/custom/{param}", param)
+		.then().statusCode(HttpStatus.EXPECTATION_FAILED.value())
+		.body("error", Matchers.is(ret));
+
+	}
+	
 	
 	@Test
 	public void customFailInvalidJson() {

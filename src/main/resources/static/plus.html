@@ -14,9 +14,9 @@
 				<div class="col-sm-9">
 					<div class="col-sm-3">
 						<label for="ruleNumber" class="col-sm-3 control-label">Number:</label>
-						<input id="ruleNumber" ng-model="ruleNumber" type="text" class="form-control" />
+						<input id="ruleNumber" ng-model="ruleNumber" type="number" min="0" max="99" class="form-control" />
 						<label for="ruleDesc" class="col-sm-3 control-label">Word:</label>
-						<input id="ruleDesc" ng-model="ruleDesc" type="text" class="form-control" />
+						<input id="ruleDesc" ng-model="ruleDesc" type="text"  class="form-control" />
 						<button type="button" class="btn  btn-primary"
 											ng-click="newRule()">Add</button>
 					</div>

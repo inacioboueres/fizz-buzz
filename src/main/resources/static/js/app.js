@@ -1,3 +1,7 @@
+$(document).ready(function(){
+	$('input[type=number]').numeric();
+});
+
 var app = angular.module('fizzBuzzApp', ['ngRoute', 'ngAnimate','ngResource' ]);
  
 app.config(function($routeProvider) {
@@ -145,6 +149,21 @@ app.controller('PlusController', function($scope, $rootScope, $http) {
 	
 	
 	$scope.newRule = function(){
+		
+		var error = false;
+		
+		if($scope.ruleNumber==null || $scope.ruleNumber=='' ||$scope.ruleNumber<1){
+			$rootScope.addMessege("To add a Rule, need to input a valid greater than zero number", "alert-danger", "Error: ");
+			error = true;
+		}
+		if($scope.ruleDesc==null || $scope.ruleDesc==''){
+			$rootScope.addMessege("To add a Rule, word is required!", "alert-danger", "Error: ");
+			error = true;
+		}
+		
+		if(error){
+			return;
+		}
 
         $scope.rules.push({id:$scope.ruleNumber, desc:$scope.ruleDesc});
 

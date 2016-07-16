@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inacio.boueres.fizz.buzz.entity.CustomParam;
 import com.inacio.boueres.fizz.buzz.entity.Rules;
+import com.inacio.boueres.fizz.buzz.exceptions.InvalidRuleIdException;
 import com.inacio.boueres.fizz.buzz.exceptions.MalformedJsonException;
 import com.inacio.boueres.fizz.buzz.exceptions.TooManyNumbersException;
 
@@ -141,6 +142,9 @@ public class CustomController {
     private void check (StringBuilder sb, BigDecimal n, CustomParam cp  ){
     	StringBuilder ret = new StringBuilder();
     	for(Rules r : cp.getRules()){
+    		if(r.getId().compareTo(BigDecimal.ONE)<0){
+    			throw new InvalidRuleIdException();
+    		}
     		if(cp.getTypeId().equals("D")){//Divisible 
     			if(n.remainder(r.getId()).equals(BigDecimal.ZERO)){
     				ret.append(r.getDesc()+" ");
@@ -195,6 +199,12 @@ public class CustomController {
     @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
     public String handleDefaultException(MalformedJsonException e) {
     	return "{\"error\": \""+"The Json parameter is invalid!"+"\"}";
+    }
+    
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+    public String handleDefaultException(InvalidRuleIdException e) {
+    	return "{\"error\": \""+"The Rules Id must be greater than 0!"+"\"}";
     }
 
 }
