@@ -1,10 +1,10 @@
-$(document).ready(function(){
-	$('input[type=number]').numeric();
-});
+
 
 var app = angular.module('fizzBuzzApp', ['ngRoute', 'ngAnimate','ngResource','ngMaterial', 'ngMessages', 'material.svgAssetsCache' ]);
+
+
  
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $httpProvider) {
 	$routeProvider.when('/plus', {
 		templateUrl: 'plus.html',
 		controller: 'PlusController'
@@ -18,6 +18,28 @@ app.config(function($routeProvider) {
 	    redirectTo: '/'
 
 	});
+	$httpProvider.interceptors.push(function($q) {
+	    return {
+	     'request': function(config) {
+	         $('#processing').show();
+	         return config;
+	      },
+
+	      'response': function(response) {
+	         $('#processing').hide();
+	         return response;
+	      },
+	      'requestError': function(rejection) {
+	    	  $('#processing').hide();
+	         return $q.reject(rejection);
+	       },
+	       'responseError': function(rejection) {
+	    	   $('#processing').hide();
+    	      return $q.reject(rejection);
+    	    }
+
+	    };
+	  });
 	
 }).run(function($rootScope,$timeout ) {
 	
