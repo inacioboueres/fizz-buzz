@@ -120,13 +120,13 @@ public class CustomControllerTest {
 	}
 	
 	@Test
-	public void customReturnOkRepetition() {
+	public void customReturnOkContaining() {
 		String ret = "1, 2, Fizz, 4, Buzz, Fizz, Fizz Buzz" ;
 		
 		CustomParam cp = new CustomParam();
 		cp.setNumbers("1 2 3 4 5 31 53");
 		cp.setOrderId("U");
-		cp.setTypeId("R");
+		cp.setTypeId("C");
 		cp.setRules(new ArrayList<Rules>());
 		cp.getRules().add(new Rules(new BigDecimal("3"),"Fizz"));
 		cp.getRules().add(new Rules(new BigDecimal("5"),"Buzz"));

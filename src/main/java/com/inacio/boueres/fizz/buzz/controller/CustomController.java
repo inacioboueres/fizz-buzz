@@ -149,7 +149,7 @@ public class CustomController {
     			if(n.remainder(r.getId()).equals(BigDecimal.ZERO)){
     				ret.append(r.getDesc()+" ");
     			}
-    		}else if(cp.getTypeId().equals("R")){//Repetition 
+    		}else if(cp.getTypeId().equals("C")){//Containing 
     			if(n.toString().contains(r.getId().toString())){
     				ret.append(r.getDesc()+" ");
     			}

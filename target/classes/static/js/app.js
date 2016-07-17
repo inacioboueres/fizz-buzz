@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$('input[type=number]').numeric();
 });
 
-var app = angular.module('fizzBuzzApp', ['ngRoute', 'ngAnimate','ngResource' ]);
+var app = angular.module('fizzBuzzApp', ['ngRoute', 'ngAnimate','ngResource','ngMaterial', 'ngMessages', 'material.svgAssetsCache' ]);
  
 app.config(function($routeProvider) {
 	$routeProvider.when('/plus', {
@@ -50,7 +50,7 @@ app.controller('ClassicController', function($scope, $rootScope, $http) {
 	$scope.result = '';
 	$scope.title = 'Classic';
 	 
-	$scope.login = function() {
+	$scope.playGame = function() {
 		$http({
 			method : "GET",
 			url : 'classicFast/'+$scope.teste,
@@ -79,7 +79,7 @@ app.controller('ClassicLNController', function($scope, $rootScope, $http) {
 	$scope.result = '';
 	$scope.title = 'Classic Large Numbers';
 	 
-	$scope.login = function() {
+	$scope.playGame = function() {
 		$http({
 			method : "GET",
 			url : 'classicBigNumber/'+$scope.teste,
@@ -123,8 +123,8 @@ app.controller('PlusController', function($scope, $rootScope, $http) {
 	      	'id': 'D',
 	      	'desc': 'Divisible '
 	    }, {
-	    	'id': 'R',
-		    'desc': 'Repetition '
+	    	'id': 'C',
+		    'desc': 'Containing '
 	    }, {
 	    	'id': 'B',
 		    'desc': 'Both '
@@ -178,7 +178,7 @@ app.controller('PlusController', function($scope, $rootScope, $http) {
       $scope.rules.splice(index,1);     
     }
 	 
-	$scope.login = function() {
+	$scope.playGame = function() {
 		$scope.param.numbers = $scope.teste;
 		$scope.param.orderId = $scope.orderId;
 		$scope.param.typeId = $scope.typeId;
